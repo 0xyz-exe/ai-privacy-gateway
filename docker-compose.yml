@@ -1,0 +1,51 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8000
+      - DATABASE_URL=postgresql://gateway_user:gateway_secure_pass@db:5432/gateway_db
+      - GATEWAY_SECRET_KEY=change-in-production-random-secret-key-32chars
+      - GATEWAY_ADMIN_TOKEN=admin-secret-token-demo
+      - PII_DETECTION_ENABLED=true
+      - PII_DEFAULT_MODE=redact
+      - PII_MIN_CONFIDENCE=0.70
+      - RATE_LIMIT_ENABLED=true
+      - AUDIT_LOG_ENABLED=true
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: gateway_user
+      POSTGRES_PASSWORD: gateway_secure_pass
+      POSTGRES_DB: gateway_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gateway_user -d gateway_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
