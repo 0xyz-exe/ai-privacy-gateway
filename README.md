@@ -17,6 +17,37 @@
   <img src="docs/screenshots/dashboard.png" width="100%" alt="AI Privacy Gateway Dashboard" />
 </p>
 
+## Visual Console Tour
+
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <h4 align="center">Privacy Playground & Redaction Preview</h4>
+      <img src="docs/screenshots/playground.png" width="100%" alt="Playground Preview" />
+    </td>
+    <td width="50%">
+      <h4 align="center">Declarative Privacy Policies</h4>
+      <img src="docs/screenshots/policies.png" width="100%" alt="Policies Manager" />
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h4 align="center">AI Providers & Adapters</h4>
+      <img src="docs/screenshots/providers.png" width="100%" alt="AI Providers" />
+    </td>
+    <td width="50%">
+      <h4 align="center">Gateway API Key Management</h4>
+      <img src="docs/screenshots/api-keys.png" width="100%" alt="API Keys" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <h4 align="center">Privacy-Preserving Audit Trail</h4>
+      <img src="docs/screenshots/audit-logs.png" width="100%" alt="Audit Logs" />
+    </td>
+  </tr>
+</table>
+
 ---
 
 ## Overview
